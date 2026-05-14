@@ -3,128 +3,128 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User Management</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>User Management</title>
 
-    <link rel="stylesheet"
-          href="assests/ViewUserList.css">
-</head>
-<body>
+        <link rel="stylesheet"
+              href="assests/ViewUserList.css">
+    </head>
+    <body>
 
-    <div class="wrapper">
+        <div class="wrapper">
 
-        <!-- SIDEBAR -->
-        <div class="sidebar">
+            <!-- SIDEBAR -->
+            <div class="sidebar">
 
-            <div class="logo-box">
-                Logo
-            </div>
+                <div class="logo-box">
+                    Logo
+                </div>
 
-            <hr>
+                <hr>
 
-            <div class="menu">
+                <div class="menu">
 
-                <a href="AdminDashBoard" class="menu-item">
-                    Home
-                </a>
+                    <a href="AdminDashBoard" class="menu-item">
+                        Home
+                    </a>
 
-                <a href="ViewUserList" class="menu-item active">
-                    User Management
-                </a>
+                    <a href="ViewUserList" class="menu-item active">
+                        User Management
+                    </a>
 
-                <a href="#" class="menu-item">
-                    Role Management
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- MAIN -->
-        <div class="main-content">
-
-            <!-- TOPBAR -->
-            <div class="topbar">
-
-                <div class="admin-box">
-
-                    <div class="avatar"></div>
-
-                    <span>admin</span>
+                    <a href="#" class="menu-item">
+                        Role Management
+                    </a>
 
                 </div>
 
             </div>
 
-            <!-- USER TABLE -->
-            <div class="table-container">
+            <!-- MAIN -->
+            <div class="main-content">
 
-                <div class="table-header">
+                <!-- TOPBAR -->
+                <div class="topbar">
 
-                    <h2>User List</h2>
+                    <div class="admin-box">
 
-                    <button class="add-btn">
-                        <a href="${pageContext.request.contextPath}/AddNewUser">Add new user</a>
-                    </button>
+                        <div class="avatar"></div>
+
+                        <span>admin</span>
+
+                    </div>
 
                 </div>
 
-                <table>
+                <!-- USER TABLE -->
+                <div class="table-container">
 
-                    <thead>
-                    <tr>
-                        <th>UserId</th>
-                        <th>UserName</th>
-                        <th>FullName</th>
-                        <th>RoleName</th>
-                        <th>Gender</th>
-                        <th>Sdt</th>
-                        <th>Email</th>
-                        <th>isActive</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
+                    <div class="table-header">
 
-                    <tbody>
+                        <h2>User List</h2>
 
-                    <!-- JSTL LOOP -->
-                    <c:forEach items="${userlist}" var="u">
+                        <button class="add-btn">
+                            <a href="${pageContext.request.contextPath}/AddNewUser">Add new user</a>
+                        </button>
 
-                        <tr>
+                    </div>
 
-                            <td>${u.id}</td>
-                            <td>${u.userName}</td>
-                            <td>${u.fullName}</td>
-                            <td>${u.role}</td>
-                            <td>${u.gender}</td>
-                            <td>${u.sdt}</td>
-                            <td>${u.email}</td>
+                    <table>
 
-                            <td>
-                                <input type="checkbox"
-                                       ${u.isActive ? 'checked' : ''}>
-                            </td>
+                        <thead>
+                            <tr>
+                                <th>UserId</th>
+                                <th>UserName</th>
+                                <th>FullName</th>
+                                <th>RoleName</th>
+                                <th>Gender</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>isActive</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
 
-                            <td>
-                                <a href="${pageContext.request.contextPath}/UpdateUserInformation?id=${u.id}">
-                                    <u>Update Information</u>
-                                </a>
-                            </td>
+                        <tbody>
 
-                        </tr>
+                            <!-- JSTL LOOP -->
+                            <c:forEach items="${userlist}" var="u">
 
-                    </c:forEach>
+                                <tr>
 
-                    </tbody>
+                                    <td>${u.id}</td>
+                                    <td>${u.userName}</td>
+                                    <td>${u.fullName}</td>
+                                    <td>${u.role}</td>
+                                    <td>${u.gender}</td>
+                                    <td>${u.phone}</td>
+                                    <td>${u.email}</td>
 
-                </table>
+                                    <td>
+                                        <input type="checkbox"
+                                               ${u.isActive ? 'checked' : ''}>
+                                    </td>
+
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}/UpdateUserInformation?id=${u.id}">
+                                            <u>Update Information</u>
+                                        </a>
+                                    </td>
+
+                                </tr>
+
+                            </c:forEach>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
-
-</body>
+    </body>
 </html>
