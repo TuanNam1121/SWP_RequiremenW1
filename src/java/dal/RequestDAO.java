@@ -19,25 +19,24 @@ import model.Request;
  * @author Admin
  */
 public class RequestDAO {
-    public List<Request> getAllRequest(){
+
+    public List<Request> getAllRequest() {
         String sql = "select * from requests";
-        
-        try(Connection conn = DBContext.getConnection(); 
-             PreparedStatement ps = conn.prepareStatement(sql); 
-             ResultSet rs = ps.executeQuery()){
+
+        try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             List<Request> result = new ArrayList<>();
-            while(rs.next()){
+            while (rs.next()) {
                 Request i = mapResultSetToRequest(rs);
                 result.add(i);
             }
             return result;
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
         return null;
     }
-    
-    private Request mapResultSetToRequest(ResultSet rs) throws SQLException{
+
+    private Request mapResultSetToRequest(ResultSet rs) throws SQLException {
         Request i = new Request();
         i.setRequestId(rs.getInt("request_id"));
         i.setUserId(rs.getInt("user_id"));
@@ -48,11 +47,11 @@ public class RequestDAO {
         i.setCreatedAt(createdAt.toLocalDateTime().format(format));
         return i;
     }
-    
+
     public static void main(String[] args) {
         RequestDAO dao = new RequestDAO();
         List<Request> list = dao.getAllRequest();
-        for(Request i : list){
+        for (Request i : list) {
             System.out.println(i.toString());
         }
     }
