@@ -1,6 +1,5 @@
 /target/                   
 *.class                    
-*.jar
 *.war
 *.ear
 
@@ -8,6 +7,7 @@
 
 /nbproject/private/         
 /nbbuild/
+/build/
 /dist/
 /nbdist/
 /.nb-gradle/
