@@ -1,0 +1,95 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="assests/AdminDashBoard.css">
+</head>
+<body>
+    <div class="container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+
+            <div class="logo-box">
+                Logo
+            </div>
+
+            <hr>
+
+            <div class="menu">
+
+                <a href="AdminDashBoard" class="menu-item">
+                    Home
+                </a>
+
+                <a href="ViewUserList" class="menu-item">
+                    User Management
+                </a>
+
+                <a href="#" class="menu-item">
+                    Role Management
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <!-- Top Bar -->
+            <div class="topbar">
+
+                <div class="admin-box">
+                    <div class="avatar"></div>
+                    <span>admin</span>
+                </div>
+
+            </div>
+
+            <!-- Content -->
+            <div class="content-box">
+
+                <h2>Request From Staff</h2>
+
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>UserId</th>
+                        <th>Message</th>
+                        <th>CreatedAt</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <!-- JSTL LOOP -->
+                    <c:forEach items="${requestlist}" var="r">
+
+                        <tr>
+                            <td>${r.userId}</td>
+                            <td>${r.message}</td>
+                            <td>${r.createdAt}</td>
+                            <td>${r.status}</td>
+                        </tr>
+                    </c:forEach>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
