@@ -32,7 +32,7 @@
                         User Management
                     </a>
                     <br>
-                    <a href="#" class="menu-item">
+                    <a href="ViewRoleList" class="menu-item">
                         Role Management
                     </a>
 
