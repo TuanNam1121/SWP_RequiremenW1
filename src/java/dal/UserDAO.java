@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
-import java.util.logging.Logger;
-import java.lang.reflect.Field;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.*;
@@ -59,7 +57,7 @@ public class UserDAO {
         i.setId(rs.getInt("user_id"));
         i.setUserName(rs.getString("username"));
         i.setRole(role.getRoleNameFromUserID(i.getId()));
-        i.setPhone(rs.getString("phone"));
+        i.setPhone(rs.getString("sdt"));
         i.setGender(rs.getString("gender"));
         i.setEmail(rs.getString("email"));
         i.setFullName(rs.getString("full_name"));
@@ -68,7 +66,7 @@ public class UserDAO {
     }
 
     public boolean addNewUser(User user) {
-        String sql = "Insert into Users(username, password_hash, role_id, phone, email, gender, full_name, is_active)"
+        String sql = "Insert into Users(username, password_hash, role_id, sdt, email, gender, full_name, is_active)"
                 + "values (?,?,?,?,?,?,?,?)";
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -88,7 +86,7 @@ public class UserDAO {
     }
 
     public boolean updateUserInformation(User user) {
-        String sql = "Update Users SET username = ?, role_id = ? , phone = ?, email = ?, gender = ?, full_name = ?, is_active = ? where user_id = ?";
+        String sql = "Update Users SET username = ?, role_id = ? , sdt = ?, email = ?, gender = ?, full_name = ?, is_active = ? where user_id = ?";
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user.getUserName());

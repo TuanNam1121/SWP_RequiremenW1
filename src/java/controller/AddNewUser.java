@@ -7,12 +7,10 @@ package controller;
 import dal.RoleDAO;
 import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 import model.Role;
 import model.User;
@@ -61,7 +59,7 @@ public class AddNewUser extends HttpServlet {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
-
+        String active_raw = request.getParameter("active");
         User i = new User(userName, fullname, password, role, phone, email, gender, true);
         if (user.addNewUser(i)) {
             response.sendRedirect("ViewUserList");

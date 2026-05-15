@@ -67,7 +67,7 @@ public class RoleDAO {
     }
 
     public String getRoleNamFromRoleID(int id) {
-        String sql = "select role_name from roles where role_id = ?";
+        String sql = "select role_name from roles where role_id = '?'";
 
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);

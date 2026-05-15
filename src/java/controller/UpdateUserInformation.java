@@ -69,12 +69,14 @@ public class UpdateUserInformation extends HttpServlet {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
-        String isActive = request.getParameter("active");
+        String isActive_raw = request.getParameter("active");
+        boolean isActive = ("true".equals(isActive_raw));
         try {
-            User i = new User(Integer.parseInt(id_raw), userName, fullname, role, role, email, gender, true);
+            User i = new User(Integer.parseInt(id_raw), userName, fullname, role, phone, email, gender, isActive);
             if (user.updateUserInformation(i)) {
                 response.sendRedirect("ViewUserList");
             } else {
+                request.setAttribute("u", i);
                 String message = "Đã xảy ra lỗi !";
                 request.setAttribute("error", message);
                 request.getRequestDispatcher("UserDetail.jsp").forward(request, response);
