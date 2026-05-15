@@ -24,6 +24,12 @@
                 <tr>
                     <td><input type="submit" value="LOGIN" /></td>
                 </tr>
+                
+                <tr>
+                    <td>
+                        <a href="forgotPassword">Forgot password ?</a>
+                    </td>    
+                </tr>
             </table>
 
         </form>
