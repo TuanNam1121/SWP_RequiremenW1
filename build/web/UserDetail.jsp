@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Add New User</title>
+        <title>${act.equals("new") ? "Add New User" : "Update User Information"}</title>
         <link rel="stylesheet" href="assests/UserDetail.css">
     </head>
     <body>
@@ -20,9 +20,15 @@
                 <div class="line"></div>
 
                 <div class="menu">
-                    <p>Home</p>
-                    <p class="active">User Management</p>
-                    <p>Role Management</p>
+                    <a href="AdminDashBoard" class="menu-item">
+                        Home
+                    </a>
+
+                    <a href="ViewUserList" class="menu-item">
+                        User Management
+                    </a>
+                    
+                    <a class="menu-item">Role Management</a>
                 </div>
 
             </div>

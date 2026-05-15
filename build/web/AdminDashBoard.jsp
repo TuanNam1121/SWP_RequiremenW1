@@ -27,11 +27,11 @@
                     <a href="AdminDashBoard" class="menu-item">
                         Home
                     </a>
-
+                    <br>
                     <a href="ViewUserList" class="menu-item">
                         User Management
                     </a>
-
+                    <br>
                     <a href="#" class="menu-item">
                         Role Management
                     </a>
