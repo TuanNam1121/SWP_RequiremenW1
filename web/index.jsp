@@ -21,5 +21,9 @@
             <!-- Sau khi đã đăng nhập thành công nhé -->
             <a href="${pageContext.request.contextPath}/AdminDashBoard">AdminDashBoard</a>
         </div>
+
+        <div>
+            <a href="home">Home</a>
+        </div>
     </body>
 </html>

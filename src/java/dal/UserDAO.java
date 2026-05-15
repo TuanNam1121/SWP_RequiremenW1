@@ -3,12 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
+
 import java.util.List;
 import java.sql.Connection;
 import java.sql.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.User;
+import org.mindrot.bcrypt.BCrypt;
 import utils.HashPassword;
 
 /**
@@ -45,6 +47,27 @@ public class UserDAO {
             if (rs.next()) {
                 User i = mapResultSetToUser(rs);
                 return i;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    public User checkLogin(String username, String password) {
+        String sql = "Select * from users where username = ?";
+        try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
+
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                String hashedPassword = rs.getString("password_hash");
+                if (BCrypt.checkpw(password, hashedPassword)) {
+                    User i = mapResultSetToUser(rs);
+                    return i;
+                }
+
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -98,7 +121,7 @@ public class UserDAO {
             ps.setBoolean(7, user.isIsActive());
             ps.setInt(8, user.getId());
             return ps.executeUpdate() == 1;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return false;
@@ -106,11 +129,12 @@ public class UserDAO {
 
     public static void main(String[] args) {
         UserDAO user = new UserDAO();
-        
+
         List<User> list = user.getAllUsers();
         for (User i : list) {
             System.out.println(i.toString());
         }
+
         System.out.println(user.getUserFromId(2));
     }
 }
