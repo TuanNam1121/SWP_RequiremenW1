@@ -34,11 +34,11 @@ public class Login extends HttpServlet {
 
         if (account != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("userAccount", account);
+            session.setAttribute("user", account);
 
             response.sendRedirect("home");
         } else {
-            request.setAttribute("error", "Tài khoản hoặc mật khẩu không đúng!");
+            request.setAttribute("error", "Username or Password is not correct!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }

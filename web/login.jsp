@@ -24,7 +24,7 @@
                 <tr>
                     <td><input type="submit" value="LOGIN" /></td>
                 </tr>
-                
+
                 <tr>
                     <td>
                         <a href="forgotPassword">Forgot password ?</a>
@@ -33,6 +33,9 @@
             </table>
 
         </form>
+        <c:if test="${not empty error}">
+            <p style="color: red;">${error}</p>
+        </c:if>
     </center>
 </body>
 </html>
