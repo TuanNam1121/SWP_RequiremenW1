@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
+
 import java.util.List;
 import java.sql.Connection;
 import java.sql.*;
@@ -108,7 +109,6 @@ public class UserDAO {
     }
 
     public boolean updateUserInformation(User user) {
-        String sql = "Update Users SET username = ?, role_id = ? , sdt = ?, email = ?, gender = ?, full_name = ? where user_id = ?";
         String sql = "Update Users SET username = ?, role_id = ? , sdt = ?, email = ?, gender = ?, full_name = ?, is_active = ? where user_id = ?";
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
