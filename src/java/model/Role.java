@@ -12,13 +12,23 @@ public class Role {
 
     private int roleId;
     private String roleName;
+    private boolean isActive;
 
-    public Role(int roleId, String roleName) {
+    public Role(int roleId, String roleName, boolean isActive) {
         this.roleId = roleId;
         this.roleName = roleName;
+        this.isActive = isActive;
     }
 
     public Role() {
+    }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public int getRoleId() {
