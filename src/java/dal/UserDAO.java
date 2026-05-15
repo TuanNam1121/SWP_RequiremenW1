@@ -127,6 +127,33 @@ public class UserDAO {
         return false;
     }
 
+    public boolean updateUserPassword(int userID, String newHashedPassword) {
+        String sql = "Update Users SET password_hash = ? where user_id = ?";
+        try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
+            ps.setString(1, newHashedPassword);
+            ps.setInt(2, userID);
+
+            return ps.executeUpdate() == 1;
+        } catch (SQLException ex) {
+
+        }
+        return false;
+    }
+
+    public String getPasswordById(int userId) {
+        String sql = "SELECT password_hash FROM Users WHERE user_id = ?";
+        try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("password_hash");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         UserDAO user = new UserDAO();
 

@@ -4,7 +4,6 @@
  */
 package controller.authentication;
 
-import dal.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,34 +11,30 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.User;
 
-@WebServlet(name = "Login", urlPatterns = {"/login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "Logout", urlPatterns = {"/logout"})
+public class Logout extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        HttpSession session = request.getSession(false);
+
+        if (session != null) {
+            session.invalidate();
+        }
+
+        response.sendRedirect("login");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("username");
-        String pass = request.getParameter("password");
-
-        UserDAO dao = new UserDAO();
-        User account = dao.checkLogin(user, pass);
-
-        if (account != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", account);
-
-            response.sendRedirect("home");
-        } else {
-            request.setAttribute("error", "Username or Password is not correct!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
     }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
+
 }

@@ -13,5 +13,8 @@
     </head>
     <body>
         <h1>Home</h1>
+        <a href="changePassword">Change Password</a>
+        <a href="logout">Logout</a>
+
     </body>
 </html>
