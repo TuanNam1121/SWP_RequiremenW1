@@ -3,93 +3,93 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Dashboard</title>
 
-    <!-- Link CSS -->
-    <link rel="stylesheet" href="assests/AdminDashBoard.css">
-</head>
-<body>
-    <div class="container">
+        <!-- Link CSS -->
+        <link rel="stylesheet" href="assests/AdminDashBoard.css">
+    </head>
+    <body>
+        <div class="container">
 
-        <!-- Sidebar -->
-        <div class="sidebar">
+            <!-- Sidebar -->
+            <div class="sidebar">
 
-            <div class="logo-box">
-                Logo
-            </div>
+                <div class="logo-box">
+                    Logo
+                </div>
 
-            <hr>
+                <hr>
 
-            <div class="menu">
+                <div class="menu">
 
-                <a href="AdminDashBoard" class="menu-item">
-                    Home
-                </a>
+                    <a href="AdminDashBoard" class="menu-item">
+                        Home
+                    </a>
+                    <br>
+                    <a href="ViewUserList" class="menu-item">
+                        User Management
+                    </a>
+                    <br>
+                    <a href="#" class="menu-item">
+                        Role Management
+                    </a>
 
-                <a href="ViewUserList" class="menu-item">
-                    User Management
-                </a>
-
-                <a href="#" class="menu-item">
-                    Role Management
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-content">
-
-            <!-- Top Bar -->
-            <div class="topbar">
-
-                <div class="admin-box">
-                    <div class="avatar"></div>
-                    <span>admin</span>
                 </div>
 
             </div>
 
-            <!-- Content -->
-            <div class="content-box">
+            <!-- Main Content -->
+            <div class="main-content">
 
-                <h2>Request From Staff</h2>
+                <!-- Top Bar -->
+                <div class="topbar">
 
-                <table>
+                    <div class="admin-box">
+                        <div class="avatar"></div>
+                        <span>admin</span>
+                    </div>
 
-                    <thead>
-                    <tr>
-                        <th>UserId</th>
-                        <th>Message</th>
-                        <th>CreatedAt</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
+                </div>
 
-                    <tbody>
+                <!-- Content -->
+                <div class="content-box">
 
-                    <!-- JSTL LOOP -->
-                    <c:forEach items="${requestlist}" var="r">
+                    <h2>Request From Staff</h2>
 
-                        <tr>
-                            <td>${r.userId}</td>
-                            <td>${r.message}</td>
-                            <td>${r.createdAt}</td>
-                            <td>${r.status}</td>
-                        </tr>
-                    </c:forEach>
+                    <table>
 
-                    </tbody>
+                        <thead>
+                            <tr>
+                                <th>UserId</th>
+                                <th>Message</th>
+                                <th>CreatedAt</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
 
-                </table>
+                        <tbody>
+
+                            <!-- JSTL LOOP -->
+                            <c:forEach items="${requestlist}" var="r">
+
+                                <tr>
+                                    <td>${r.userId}</td>
+                                    <td>${r.message}</td>
+                                    <td>${r.createdAt}</td>
+                                    <td>${r.status}</td>
+                                </tr>
+                            </c:forEach>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
 
             </div>
 
         </div>
-
-    </div>
-</body>
+    </body>
 </html>

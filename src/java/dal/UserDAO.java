@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
-
-import java.lang.reflect.Field;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.*;
@@ -81,7 +79,7 @@ public class UserDAO {
         i.setId(rs.getInt("user_id"));
         i.setUserName(rs.getString("username"));
         i.setRole(role.getRoleNameFromUserID(i.getId()));
-        i.setSdt(rs.getString("sdt"));
+        i.setPhone(rs.getString("sdt"));
         i.setGender(rs.getString("gender"));
         i.setEmail(rs.getString("email"));
         i.setFullName(rs.getString("full_name"));
@@ -97,7 +95,7 @@ public class UserDAO {
             ps.setString(1, user.getUserName());
             ps.setString(2, HashPassword.hashPassword(user.getPassword()));
             ps.setInt(3, role.getRoleIdFromRoleName(user.getRole()));
-            ps.setString(4, user.getSdt());
+            ps.setString(4, user.getPhone());
             ps.setString(5, user.getEmail());
             ps.setString(6, user.getGender());
             ps.setString(7, user.getFullName());
@@ -111,15 +109,17 @@ public class UserDAO {
 
     public boolean updateUserInformation(User user) {
         String sql = "Update Users SET username = ?, role_id = ? , sdt = ?, email = ?, gender = ?, full_name = ? where user_id = ?";
+        String sql = "Update Users SET username = ?, role_id = ? , sdt = ?, email = ?, gender = ?, full_name = ?, is_active = ? where user_id = ?";
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user.getUserName());
             ps.setInt(2, role.getRoleIdFromRoleName(user.getRole()));
-            ps.setString(3, user.getSdt());
+            ps.setString(3, user.getPhone());
             ps.setString(4, user.getEmail());
             ps.setString(5, user.getGender());
             ps.setString(6, user.getFullName());
-            ps.setInt(7, user.getId());
+            ps.setBoolean(7, user.isIsActive());
+            ps.setInt(8, user.getId());
             return ps.executeUpdate() == 1;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

@@ -32,5 +32,5 @@ public class HashPassword {
         if (HashPassword.checkPassword("Nam", a)) {
             System.out.println("Không hiểu sao có thể có quả thuật toán ảo như này");
         }
-    }
+    }   
 }
