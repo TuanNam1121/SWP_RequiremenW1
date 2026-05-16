@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.Random;
-import service.ForgetSer;
+import api.EmailApi;
 
 public class ForgetPassword extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -66,7 +66,7 @@ public class ForgetPassword extends HttpServlet {
         session.setAttribute("sysPin", pin);
         session.setAttribute("pinExpiryTime", expiryTime);
         
-        boolean isEmailSent = ForgetSer.sendEmail(email, pin);
+        boolean isEmailSent = EmailApi.sendEmail(email, pin);
 
         if (isEmailSent) {
             response.sendRedirect("VerifyPin.jsp");
