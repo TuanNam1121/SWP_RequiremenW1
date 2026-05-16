@@ -164,4 +164,20 @@ public class UserDAO {
 
         System.out.println(user.getUserFromId(2));
     }
+
+    public boolean checkEmailExist(String email) {
+        String sql = "Select 1 from users where email = ?";
+        try (
+            Connection conn = DBContext.getConnection(); 
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery();) {
+                return rs.next();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
 }

@@ -24,6 +24,7 @@
 
         <div>
             <a href="home">Home</a>
+            <a href="${pageContext.request.contextPath}/viewprofile"}>View Profile</a>
         </div>
     </body>
 </html>

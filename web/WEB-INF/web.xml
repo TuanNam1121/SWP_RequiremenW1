@@ -9,6 +9,16 @@
         <servlet-class>controller.UpdateUserInformation</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ForgetPassword</servlet-name>
+        <servlet-class>controller.authentication.ForgetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyPin</servlet-name>
+        <servlet-class>controller.authentication.VerifyPin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewProfile</servlet-name>
+        <servlet-class>controller.ViewProfile</servlet-class>
         <servlet-name>ViewPermissionList</servlet-name>
         <servlet-class>controller.ViewPermissionList</servlet-class>
     </servlet>
@@ -37,6 +47,16 @@
         <url-pattern>/UpdateUserInformation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ForgetPassword</servlet-name>
+        <url-pattern>/forgetpassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyPin</servlet-name>
+        <url-pattern>/verifypin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProfile</servlet-name>
+        <url-pattern>/viewprofile</url-pattern>
         <servlet-name>ViewPermissionList</servlet-name>
         <url-pattern>/ViewPermissionList</url-pattern>
     </servlet-mapping>

@@ -17,6 +17,7 @@ public class DBContext {
     private static String user = "root";
     private static String pass = "1234";
 
+
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
