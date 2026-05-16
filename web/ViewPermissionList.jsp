@@ -26,23 +26,18 @@
                 <hr>
 
                 <div class="menu">
-
                     <a href="AdminDashBoard" class="menu-item">
                         Home
                     </a>
-                    <br>
                     <a href="ViewUserList" class="menu-item">
                         User Management
                     </a>
-                    <br>
-                    <a href="#" class="menu-item">
+                    <a href="ViewRoleList" class="menu-item">
                         Role Management
                     </a>
-                    <br>
-                    <a href="#" class="menu-item">
-                        Role Management
+                    <a href="ViewPermissionList" class="menu-item active">
+                        Permission Management
                     </a>
-
                 </div>
 
             </div>
