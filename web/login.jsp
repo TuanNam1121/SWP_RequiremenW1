@@ -180,7 +180,7 @@
 
                         <button type="submit" class="login-btn">Login</button>
 
-                        <a href="forgotPassword" class="forgot-pass">forgot password</a>
+                        <a href="forgetpassword" class="forgot-pass">forgot password</a>
                     </form>
                 </div>
             </div>

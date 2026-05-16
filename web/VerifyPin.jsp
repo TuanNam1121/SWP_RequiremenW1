@@ -15,20 +15,19 @@
 
             <div class="right-section">
                 <div class="login-card">
-                    <h1 class="signin-title">Reset your password</h1>
-                    <p class="register-text">If the account exists, we will email you code to reset the password.</p>
+                    <h1 class="signin-title">Enter pin</h1>
 
-                    <form action="forgetpassword" method="post">
+                    <form action="verifypin" method="post">
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="text" name="email" class="input-field" value="${param.email}" required/>
+                            <label>Enter the pin</label>
+                            <input type="text" name="pin" class="input-field" required/>
                         </div>
 
                         <c:if test="${not empty error}">
                             <p style="color: red; margin-bottom: 15px; font-size: 0.9rem;">${error}</p>
                         </c:if>
 
-                        <button type="submit" class="login-btn">Send request</button>
+                        <button type="submit" class="login-btn">Verify</button>
 
                         <a href="login" class="forgot-pass">Return to Sign in</a>
                         
