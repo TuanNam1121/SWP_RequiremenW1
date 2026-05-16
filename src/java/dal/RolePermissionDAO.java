@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dal;
 
 import java.sql.Connection;
@@ -60,6 +57,49 @@ public class RolePermissionDAO {
             exception.printStackTrace();
         }
     }
+    
+    public void deletePermissionRole(Role r) {
+        try {Connection conn = DBContext.getConnection();
+            String sql = "DELETE FROM role_permissions WHERE role_id = ?";
+            st = conn.prepareStatement(sql);
+            st.setInt(1, r.getRoleId());
+            st.executeUpdate();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+    
+    public List<Permission> getPermissionByRole(int roleId) {
+
+        String sql =  """
+                 SELECT *
+                 FROM permissions p
+                 JOIN role_permissions rp
+                     ON rp.permission_id = p.permission_id
+                 WHERE rp.role_id = ?
+                 """;
+
+        try (
+                Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, roleId);
+            ResultSet rs = ps.executeQuery();
+            List<Permission> result = new ArrayList<>();
+
+            while (rs.next()) {
+                int permissionId = rs.getInt("permission_id");
+                String permissionName = rs.getString("permission_name");
+                Permission r = new Permission(permissionId, permissionName);
+                result.add(r);
+            }
+
+            return result;
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return null;
+    }
 
     public List<Role> getRoleByPermission(Permission p) {
 
@@ -80,7 +120,8 @@ public class RolePermissionDAO {
             while (rs.next()) {
                 int roleId = rs.getInt("role_id");
                 String roleName = rs.getString("role_name");
-                Role r = new Role(roleId, roleName);
+//                boolean isActive = rs.getBoolean("is_active");
+                Role r = new Role(roleId, roleName, true);
                 result.add(r);
             }
 

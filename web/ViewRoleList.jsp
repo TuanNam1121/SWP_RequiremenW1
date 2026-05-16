@@ -27,6 +27,9 @@
                     <a href="ViewRoleList" class="menu-item active">
                         Role Management
                     </a>
+                    <a href="ViewPermissionList" class="menu-item">
+                        Permission Management
+                    </a>
                 </div>
             </div>
 
