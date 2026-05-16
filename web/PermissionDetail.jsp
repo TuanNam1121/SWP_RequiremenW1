@@ -62,7 +62,7 @@
 
                                 <label>Description</label>
                                 <!---->
-                                <input type="text" name="permissionDescription" value="">
+                                <input type="text" name="permissionDescription" value="${p != null ? p.description : ''}">
 
 
 

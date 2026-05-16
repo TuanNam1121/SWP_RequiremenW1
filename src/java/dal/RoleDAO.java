@@ -19,7 +19,7 @@ import model.Role;
 public class RoleDAO {
 
     public List<Role> getAllRole() {
-        String sql = "select * from roles";
+        String sql = "select * from role";
 
         try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             List<Role> result = new ArrayList<>();
@@ -35,7 +35,7 @@ public class RoleDAO {
     }
 
     public List<Role> getAllRoleToAssign() {
-        String sql = "select * from roles where role_name != 'Admin'";
+        String sql = "select * from role where rolename != 'Admin'";
 
         try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             List<Role> result = new ArrayList<>();
@@ -51,7 +51,7 @@ public class RoleDAO {
     }
 
     public String getRoleNameFromUserID(int userId) {
-        String sql = "select r.role_name from roles r join users u on u.role_id = r.role_id where u.user_id = ?;";
+        String sql = "select r.rolename from role r join user u on u.roleid = r.roleid where u.userid = ?;";
 
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -67,13 +67,13 @@ public class RoleDAO {
     }
 
     public String getRoleNamFromRoleID(int id) {
-        String sql = "select role_name from roles where role_id = '?'";
+        String sql = "select rolename from role where roleid = '?'";
 
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            return rs.getString("role_name");
+            return rs.getString("rolename");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -81,7 +81,7 @@ public class RoleDAO {
     }
 
     public Integer getRoleIdFromRoleName(String roleName) {
-        String sql = "select role_id from roles where role_name = ?";
+        String sql = "select roleid from role where rolename = ?";
 
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -98,14 +98,15 @@ public class RoleDAO {
 
     public Role mapResultSetToRole(ResultSet rs) throws SQLException {
         Role i = new Role();
-        i.setRoleId(rs.getInt("role_id"));
-        i.setRoleName(rs.getString("role_name"));
+        i.setRoleId(rs.getInt("roleid"));
+        i.setRoleName(rs.getString("rolename"));
+        i.setIsActive(rs.getBoolean("isActive"));
         return i;
     }
 
     //HungTQ added
     public Role getRoleById(int id) {
-        String sql = "select * from roles where role_id = ?";
+        String sql = "select * from role where roleid = ?";
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -124,12 +125,13 @@ public class RoleDAO {
     public void updateRole(Role r) {
         try {
             Connection conn = DBContext.getConnection();
-            String sql = "UPDATE roles SET role_name = ? WHERE role_id = ?";
+            String sql = "UPDATE role SET rolename = ?, isActive = ? WHERE roleid = ?";
             PreparedStatement st;
             ResultSet rs;
             st = conn.prepareStatement(sql);
             st.setString(1, r.getRoleName());
-            st.setInt(2, r.getRoleId());
+            st.setBoolean(2, r.isIsActive());
+            st.setInt(3, r.getRoleId());
             st.executeUpdate();
         } catch (Exception exception) {
             exception.printStackTrace();

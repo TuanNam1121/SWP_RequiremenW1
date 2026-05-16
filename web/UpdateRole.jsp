@@ -64,7 +64,7 @@
                                 <!---->
                                 <input type="text" name="roleName" value="${role != null ? role.roleName : ''}">
 
-                                <label>Status</label><input type="radio" name="isActive" ${role.isActive ? checked : ''}>Activated | <input type="radio" name="isActive" ${role.isActive ? checked : ''}>Deactivated
+                                <label>Status</label><input type="radio" name="isActive" value="true" ${role.isActive ? 'checked' : ''}>Activated | <input type="radio" name="isActive" value="false" ${role.isActive ? '' : 'checked'}>Deactivated
                                 
 
 
@@ -78,12 +78,14 @@
                                     <tr>
                                         <td>Permission ID</td>
                                         <td>Permission name</td>
+                                        <td>Permission description</td>
                                         <td>Status(included)</td>
                                     </tr>
                                     <c:forEach items="${permissions}" var="p">
                                         <tr>
                                         <td><input type="text" value="${p.permissionId}" readonly="true"></td>
                                         <td><input type="text" value="${p.permissionName}" readonly="true"></td>
+                                        <td><input type="text" value="${p.description}" readonly="true"></td>
 
                                             <c:set var="checked" value="false"/>
                                             <!--check if included in list assigned-->

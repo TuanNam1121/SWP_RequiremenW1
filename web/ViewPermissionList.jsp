@@ -81,7 +81,7 @@
                                 <tr>
                                     <td>${p.permissionId}</td>
                                     <td>${p.permissionName}</td>
-                                    <td></td>
+                                    <td>${p.description}</td>
                                     <td><a href="PermissionDetail?action=edit&permissionId=${p.permissionId}">Edit</a></td>
                                 </tr>
                             </c:forEach>
