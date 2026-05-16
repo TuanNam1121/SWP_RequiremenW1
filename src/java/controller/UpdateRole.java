@@ -87,11 +87,12 @@ public class UpdateRole extends HttpServlet {
             throws ServletException, IOException {
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         String name = request.getParameter("roleName");
+        String isActive = request.getParameter("isActive");
 
         String[] permissions = request.getParameterValues("permission");
 
         RoleDAO rd = new RoleDAO();
-        Role r = new Role(roleId, name, true);
+        Role r = new Role(roleId, name, isActive.equals("true"));
         rd.updateRole(r);
         //update Role field then disable role permission then remap
         RolePermissionDAO rpd = new RolePermissionDAO();

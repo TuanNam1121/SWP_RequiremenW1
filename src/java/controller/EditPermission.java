@@ -70,6 +70,7 @@ public class EditPermission extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
          String name = request.getParameter("permissionName");
+         String description = request.getParameter("permissionDescription");
          int id = Integer.parseInt(request.getParameter("id"));
         RolePermissionDAO rpd = new RolePermissionDAO();
         String[] roleIds = request.getParameterValues("role");
@@ -79,6 +80,7 @@ public class EditPermission extends HttpServlet {
         PermissionDAO pd = new PermissionDAO();
         Permission p = pd.getPermission(id);
         p.setPermissionName(name);
+        p.setDescription(description);
         pd.updatePermission(p);
         
         

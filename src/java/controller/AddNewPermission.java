@@ -73,13 +73,14 @@ public class AddNewPermission extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String name = request.getParameter("permissionName");
+        String description = request.getParameter("permissionDescription");
         RolePermissionDAO rpd = new RolePermissionDAO();
         String[] roleIds = request.getParameterValues("role");
 
 //        String description = request.getParameter("permissionDescription");
 
         PermissionDAO pd = new PermissionDAO();
-        Permission p = new Permission(0, name);
+        Permission p = new Permission(0, name, description);
         pd.insertPermission(p);
         
          if (roleIds != null) {
