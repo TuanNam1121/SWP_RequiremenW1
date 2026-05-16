@@ -3,7 +3,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Reset password</title>
+        <link rel="stylesheet" href="assests/Forget.css">
     </head>
 
     <body>
@@ -18,10 +19,15 @@
                     <h1 class="signin-title">Reset your password</h1>
                     <p class="register-text">If the account exists, we will email you code to reset the password.</p>
 
-                    <form action="forgetpassword" method="post">
+                    <form action="forgetpassword" method="POST">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" name="username" class="input-field" required/>
+                        </div>
+                        
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" name="email" class="input-field" value="${param.email}" required/>
+                            <input type="text" name="email" class="input-field" required/>
                         </div>
 
                         <c:if test="${not empty error}">

@@ -3,23 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.authentication;
+package controller.admin;
 
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.Random;
-import api.EmailApi;
-import dal.RequestDAO;
-import model.Request;
-import model.User;
 
-public class ForgetPassword extends HttpServlet {
+@WebServlet(name="SolveRequest", urlPatterns={"/solverequest"})
+public class SolveRequest extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -28,10 +23,10 @@ public class ForgetPassword extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ForgetPassword</title>");  
+            out.println("<title>Servlet SolveRequest</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ForgetPassword at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SolveRequest at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -40,32 +35,17 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.sendRedirect("forget.jsp");
+        String userId = request.getParameter("userid");
+        String reqType = request.getParameter("type");
+        if (reqType.equalsIgnoreCase("ResetPassword")) {
+            response.sendRedirect("ChangePassByAdmin.jsp?userId=" + userId);
+        }
     } 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String username = request.getParameter("username");
-        UserDAO daoU = new UserDAO();
-        RequestDAO daoR = new RequestDAO();
-        
-        User user = daoU.getUser(username, email);
-        if (user == null) {
-            request.setAttribute("error", "Username or Email is invalid! Please try again!");
-            request.getRequestDispatcher("forget.jsp").forward(request, response);
-            return;
-        }
-        
-        Request req = new Request();
-        req.setUserId(user.getId());
-        req.setStatus("NEW");
-        req.setMessage("ResetPassword");
-        daoR.addNewRequest(req);
-        
-        request.setAttribute("error", "Request sent! Please wait for an email!");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     @Override

@@ -36,6 +36,26 @@ public class RequestDAO {
         return null;
     }
 
+    public Request getLatestRequestByUserId(int userId) {
+    String sql = "select * from requests where user_id = ? order by created_at desc limit 1";
+
+    try (Connection conn = DBContext.getConnection(); 
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        
+        ps.setInt(1, userId);
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return mapResultSetToRequest(rs);
+            }
+        }
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+    
+    return null;
+}
+    
     private Request mapResultSetToRequest(ResultSet rs) throws SQLException {
         Request i = new Request();
         i.setRequestId(rs.getInt("request_id"));
@@ -46,6 +66,21 @@ public class RequestDAO {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         i.setCreatedAt(createdAt.toLocalDateTime().format(format));
         return i;
+    }
+    
+    public boolean addNewRequest(Request request) {
+        String sql = "Insert into requests(user_id, status, message)"
+                + " values (?,?,?)";
+        try (Connection conn = DBContext.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, request.getUserId());
+            ps.setString(2, request.getStatus());
+            ps.setString(3, request.getMessage());
+            return ps.executeUpdate() == 1;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 
     public static void main(String[] args) {

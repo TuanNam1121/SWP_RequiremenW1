@@ -83,6 +83,7 @@
                                     <td>${r.message}</td>
                                     <td>${r.createdAt}</td>
                                     <td>${r.status}</td>
+                                    <td><a href = solverequest?type=${r.message}&userid=${r.userId}>solve</a></td>
                                 </tr>
                             </c:forEach>
 

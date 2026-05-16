@@ -79,12 +79,17 @@ public class UserDAO {
         User i = new User();
         i.setId(rs.getInt("user_id"));
         i.setUserName(rs.getString("username"));
-        i.setRole(role.getRoleNameFromUserID(i.getId()));
-        i.setPhone(rs.getString("sdt"));
+        i.setPhone(rs.getString("phone"));
         i.setGender(rs.getString("gender"));
         i.setEmail(rs.getString("email"));
         i.setFullName(rs.getString("full_name"));
         i.setIsActive(rs.getBoolean("is_active"));
+
+        RoleDAO roleDao = new RoleDAO();
+        if (roleDao != null) {
+            i.setRole(roleDao.getRoleNameFromUserID(i.getId()));
+        }
+
         return i;
     }
 
@@ -154,6 +159,27 @@ public class UserDAO {
         return null;
     }
 
+    public User getUser(String username, String email) {
+        String sql = "select user_id, username, email FROM users where email = ? and username = ?";
+        try (
+                Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
+            ps.setString(1, email);
+            ps.setString(2, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    User user = new User();
+                    user.setId(rs.getInt("user_id"));
+                    user.setUserName(rs.getString("username"));
+                    user.setEmail(rs.getString("email"));
+                    return user;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         UserDAO user = new UserDAO();
 
@@ -163,21 +189,5 @@ public class UserDAO {
         }
 
         System.out.println(user.getUserFromId(2));
-    }
-
-    public boolean checkEmailExist(String email) {
-        String sql = "Select 1 from users where email = ?";
-        try (
-            Connection conn = DBContext.getConnection(); 
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ) {
-            ps.setString(1, email);
-            try (ResultSet rs = ps.executeQuery();) {
-                return rs.next();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return false;
     }
 }
