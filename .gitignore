@@ -13,3 +13,4 @@
 /.nb-gradle/
 .DS_Store
 
+.idea/
