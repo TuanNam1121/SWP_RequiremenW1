@@ -103,6 +103,39 @@ public class RoleDAO {
         return i;
     }
 
+    //HungTQ added
+    public Role getRoleById(int id) {
+        String sql = "select * from roles where role_id = ?";
+        try (Connection conn = DBContext.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Role i = mapResultSetToRole(rs);
+                return i;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    //also HungTQ added
+    public void updateRole(Role r) {
+        try {
+            Connection conn = DBContext.getConnection();
+            String sql = "UPDATE roles SET role_name = ? WHERE role_id = ?";
+            PreparedStatement st;
+            ResultSet rs;
+            st = conn.prepareStatement(sql);
+            st.setString(1, r.getRoleName());
+            st.setInt(2, r.getRoleId());
+            st.executeUpdate();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         RoleDAO dao = new RoleDAO();
         List<Role> res = dao.getAllRole();

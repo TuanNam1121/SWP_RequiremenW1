@@ -5,129 +5,89 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>User Management</title>
-
-        <link rel="stylesheet"
-              href="assests/ViewUserList.css">
+        <title>Role Management</title>
+        <link rel="stylesheet" href="assests/ViewRoleList.css">
     </head>
     <body>
 
         <div class="wrapper">
 
-            <!-- SIDEBAR -->
             <div class="sidebar">
-
                 <div class="logo-box">
                     Logo
                 </div>
-
                 <hr>
-
                 <div class="menu">
-
                     <a href="AdminDashBoard" class="menu-item">
                         Home
                     </a>
-
-                    <a href="ViewUserList" class="menu-item active">
+                    <a href="ViewUserList" class="menu-item">
                         User Management
                     </a>
-
-                    <a href="ViewRoleList" class="menu-item">
+                    <a href="ViewRoleList" class="menu-item active">
                         Role Management
                     </a>
-                    
                     <a href="ViewPermissionList" class="menu-item">
                         Permission Management
                     </a>
-
                 </div>
-
             </div>
 
-            <!-- MAIN -->
             <div class="main-content">
 
-                <!-- TOPBAR -->
                 <div class="topbar">
-
                     <div class="admin-box">
-
                         <div class="avatar"></div>
-
                         <span>admin</span>
-
                     </div>
-
                 </div>
 
-                <!-- USER TABLE -->
                 <div class="table-container">
 
                     <div class="table-header">
 
-                        <h2>User List</h2>
+                        <h2>Role List</h2>
 
-                        <button class="add-btn">
-                            <a href="${pageContext.request.contextPath}/AddNewUser">Add new user</a>
-                        </button>
+                        <div class="header-actions">
+                            <input type="text" class="search-input" placeholder="Search role by name">
+
+                            <button class="add-btn">
+                                <a href="${pageContext.request.contextPath}/AddNewRole">Add new role</a>
+                            </button>
+                        </div>
 
                     </div>
 
                     <table>
-
                         <thead>
                             <tr>
-                                <th>UserId</th>
-                                <th>UserName</th>
-                                <th>FullName</th>
+                                <th>RoleId</th>
                                 <th>RoleName</th>
-                                <th>Gender</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>isActive</th>
+                                <th>Status(Activated)</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
-
-                            <!-- JSTL LOOP -->
-                            <c:forEach items="${userlist}" var="u">
-
+                            <c:forEach items="${rolelist}" var="r">
                                 <tr>
-
-                                    <td>${u.id}</td>
-                                    <td>${u.userName}</td>
-                                    <td>${u.fullName}</td>
-                                    <td>${u.role}</td>
-                                    <td>${u.gender}</td>
-                                    <td>${u.phone}</td>
-                                    <td>${u.email}</td>
-
+                                    <td>${r.roleId}</td>
+                                    <td>${r.roleName}</td>
                                     <td>
                                         <input type="checkbox"
-                                               ${u.isActive ? 'checked' : ''}>
+                                               ${r.isActive ? 'checked' : ''}>
                                     </td>
-
                                     <td>
-                                        <a href="${pageContext.request.contextPath}/UpdateUserInformation?id=${u.id}">
-                                            <u>Update Information</u>
+                                        <a href="${pageContext.request.contextPath}/UpdateRole?id=${r.roleId}">
+                                            <u>Edit</u>
                                         </a>
                                     </td>
-
                                 </tr>
-
                             </c:forEach>
-
                         </tbody>
-
                     </table>
-
                 </div>
 
             </div>
-
         </div>
 
     </body>

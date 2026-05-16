@@ -1,14 +1,17 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%-- 
+    Document   : ViewPermissionList
+    Created on : May 15, 2026, 5:17:45 PM
+    Author     : LENOVO
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <title>Dashboard</title>
-
-        <!-- Link CSS -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="assests/AdminDashBoard.css">
+        <title>JSP Page</title>
     </head>
     <body>
         <div class="container">
@@ -23,23 +26,18 @@
                 <hr>
 
                 <div class="menu">
-
                     <a href="AdminDashBoard" class="menu-item">
                         Home
                     </a>
-                    <br>
                     <a href="ViewUserList" class="menu-item">
                         User Management
                     </a>
-                    <br>
                     <a href="ViewRoleList" class="menu-item">
                         Role Management
                     </a>
-                    
-                    <a href="ViewPermissionList" class="menu-item">
+                    <a href="ViewPermissionList" class="menu-item active">
                         Permission Management
                     </a>
-
                 </div>
 
             </div>
@@ -60,29 +58,31 @@
                 <!-- Content -->
                 <div class="content-box">
 
-                    <h2>Request From Staff</h2>
+                    <h2>Permission List</h2>
 
                     <table>
-
+                        
+                        <a class="menu-item" href="PermissionDetail?action=new">Create new permission</a>
+                        
                         <thead>
                             <tr>
-                                <th>UserId</th>
-                                <th>Message</th>
-                                <th>CreatedAt</th>
-                                <th>Status</th>
+                                <th>Permission ID</th>
+                                <th>Permission name</th>
+                                <th>Description</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
 
                             <!-- JSTL LOOP -->
-                            <c:forEach items="${requestlist}" var="r">
+                            <c:forEach items="${permissions}" var="p">
 
                                 <tr>
-                                    <td>${r.userId}</td>
-                                    <td>${r.message}</td>
-                                    <td>${r.createdAt}</td>
-                                    <td>${r.status}</td>
+                                    <td>${p.permissionId}</td>
+                                    <td>${p.permissionName}</td>
+                                    <td></td>
+                                    <td><a href="PermissionDetail?action=edit&permissionId=${p.permissionId}">Edit</a></td>
                                 </tr>
                             </c:forEach>
 

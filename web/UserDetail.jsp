@@ -27,8 +27,9 @@
                     <a href="ViewUserList" class="menu-item">
                         User Management
                     </a>
-                    
-                    <a class="menu-item">Role Management</a>
+                    <a href="ViewRoleList" class="menu-item">
+                        Role Management
+                    </a>
                 </div>
 
             </div>
