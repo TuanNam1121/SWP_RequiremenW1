@@ -86,17 +86,17 @@
                                     <span>Gender :</span>
 
                                     <label>
-                                        <input type="radio" name="gender" value="Male"  ${u.gender == 'Male' ? 'checked' : ''}>
+                                        <input type="radio" name="gender" value="Male"  ${u.gender == "MALE" ? 'checked' : ''}>
                                         Male
                                     </label>
 
                                     <label>
-                                        <input type="radio" name="gender" value="Female" ${u.gender == 'Female' ? 'checked' : ''}>
+                                        <input type="radio" name="gender" value="Female" ${u.gender == "FEMALE" ? 'checked' : ''}>
                                         Female
                                     </label>
 
                                     <label>
-                                        <input type="radio" name="gender" value="Other" ${u.gender == 'Other' ? 'checked' : ''}>
+                                        <input type="radio" name="gender" value="Other" ${u.gender == "OTHER" ? 'checked' : ''}>
                                         Other
                                     </label>
                                 </div>

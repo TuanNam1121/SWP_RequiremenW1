@@ -5,11 +5,11 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Dashboard</title>
-
-        <!-- Link CSS -->
-        <link rel="stylesheet" href="assests/AdminDashBoard.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Change Password</title>
+        <link rel="stylesheet" href="assests/ChangePassByAdmin.css">
     </head>
+    
     <body>
         <div class="container">
 
@@ -35,7 +35,7 @@
                     <a href="ViewRoleList" class="menu-item">
                         Role Management
                     </a>
-
+                    
                     <a href="ViewPermissionList" class="menu-item">
                         Permission Management
                     </a>
@@ -57,45 +57,36 @@
 
                 </div>
 
-                <c:if test="${not empty message}">
-                    <div style="color: green; font-weight: bold;">
-                        ${message}
-                    </div>
-                </c:if>
                 <!-- Content -->
                 <div class="content-box">
+                    <h2>change password</h2>
 
-                    <h2>Request From Staff</h2>
+                    <form action="changepassbyadmin" method="POST" class="form-container">
 
-                    <table>
+                        <div class="input-group">
+                            <label>UserId: ${userId}</label>
+                            <input type="hidden" name="userId" value="${userId}">
+                        </div>
 
-                        <thead>
-                            <tr>
-                                <th>UserId</th>
-                                <th>Message</th>
-                                <th>CreatedAt</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
+                        <div class="input-group">
+                            <label>New password</label>
+                            <input type="password" name="newPass" required>
+                        </div>
 
-                        <tbody>
+                        <div class="input-group">
+                            <label>Confirm password</label>
+                            <input type="password" name="cfNewPass" required>
+                        </div>
 
-                            <!-- JSTL LOOP -->
-                            <c:forEach items="${requestlist}" var="r">
+                        <c:if test="${not empty message}">
+                            <div style="color: #28a745; margin-bottom: 15px; font-size: 0.9rem; font-weight: 500;">${message}</div>
+                        </c:if>
 
-                                <tr>
-                                    <td>${r.userId}</td>
-                                    <td>${r.message}</td>
-                                    <td>${r.createdAt}</td>
-                                    <td>${r.status}</td>
-                                    <td><a href = solverequest?type=${r.message}&userid=${r.userId}>solve</a></td>
-                                </tr>
-                            </c:forEach>
+                        <div class="btn-wrapper">
+                            <button type="submit" class="btn-confirm">Confirm</button>
+                        </div>
 
-                        </tbody>
-
-                    </table>
-
+                    </form>
                 </div>
 
             </div>

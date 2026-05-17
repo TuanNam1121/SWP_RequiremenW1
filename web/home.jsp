@@ -15,6 +15,6 @@
         <h1>Home</h1>
         <a href="changePassword">Change Password</a>
         <a href="logout">Logout</a>
-
+        <a href="${pageContext.request.contextPath}/viewprofile"}>View Profile</a>
     </body>
 </html>

@@ -58,7 +58,7 @@ public class RoleDAO {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return rs.getString("r.role_name");
+                return rs.getString("r.rolename");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

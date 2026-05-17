@@ -52,6 +52,7 @@ public List<Permission> getAllPermission(){
             st.setInt(1, permission_id);
             rs = st.executeQuery(); //only select
             if (rs.next()) {
+
                 Permission p = mapResultSetToPermission(rs);
 
                 return p;

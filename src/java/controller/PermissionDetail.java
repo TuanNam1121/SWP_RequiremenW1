@@ -75,10 +75,6 @@ public class PermissionDetail extends HttpServlet {
             List<Role> roles = rpd.getRoleByPermission(p);
             request.setAttribute("roles", roles);
             request.setAttribute("p", p);
-
-            
-
-
         }
 
         request.getRequestDispatcher("PermissionDetail.jsp").forward(request, response);

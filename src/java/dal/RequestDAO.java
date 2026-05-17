@@ -21,7 +21,8 @@ import model.Request;
 public class RequestDAO {
 
     public List<Request> getAllRequest() {
-        String sql = "select * from requests";
+        String sql = "select * from request order by createdat desc";
+
 
         try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             List<Request> result = new ArrayList<>();
@@ -36,16 +37,67 @@ public class RequestDAO {
         return null;
     }
 
+    public Request getLatestRequestByUserId(int userId) {
+        String sql = "select * from request where userid = ? order by createdat desc limit 1";
+
+        try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapResultSetToRequest(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return null;
+    }
+
+    public boolean updateRequestStatus(int requestId, String newStatus) {
+    String sql = "update request set status = ?, completedat = CURRENT_TIMESTAMP WHERE requestid = ?";
+
+    try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, newStatus);
+        ps.setInt(2, requestId);
+
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected > 0; 
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+
+    return false;
+}
+
+    
     private Request mapResultSetToRequest(ResultSet rs) throws SQLException {
         Request i = new Request();
-        i.setRequestId(rs.getInt("request_id"));
-        i.setUserId(rs.getInt("user_id"));
+        i.setRequestId(rs.getInt("requestid"));
+        i.setUserId(rs.getInt("userid"));
         i.setStatus(rs.getString("status"));
         i.setMessage(rs.getString("message"));
-        Timestamp createdAt = rs.getTimestamp("created_at");
+        Timestamp createdAt = rs.getTimestamp("createdat");
         DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         i.setCreatedAt(createdAt.toLocalDateTime().format(format));
         return i;
+    }
+
+    public boolean addNewRequest(Request request) {
+        String sql = "Insert into request(userid, status, message)"
+                + " values (?,?,?)";
+        try (Connection conn = DBContext.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, request.getUserId());
+            ps.setString(2, request.getStatus());
+            ps.setString(3, request.getMessage());
+            return ps.executeUpdate() == 1;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 
     public static void main(String[] args) {
