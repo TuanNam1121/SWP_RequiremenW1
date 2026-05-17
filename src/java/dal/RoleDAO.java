@@ -137,6 +137,21 @@ public class RoleDAO {
             exception.printStackTrace();
         }
     }
+    
+    public void insertRole(Role r) {
+        try {
+            Connection conn = DBContext.getConnection();
+            String sql = "insert into role (rolename,isActive) values (?,?)";
+            PreparedStatement st;
+            ResultSet rs;
+            st = conn.prepareStatement(sql);
+            st.setString(1, r.getRoleName());
+            st.setBoolean(2, r.isIsActive());
+            st.executeUpdate();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         RoleDAO dao = new RoleDAO();

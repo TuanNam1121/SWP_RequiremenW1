@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Update Role</title>
+        <title>${action.equals("new") ? "Add Role":" Update Role"}</title>
         <link rel="stylesheet" href="assests/UserDetail.css">
     </head>
     <body>
@@ -47,90 +47,91 @@
                 <!-- Form -->
                 <div class="form-container">
 
-                    <h2>Update Role</h2>
+                    <h2>${action.equals("new") ? "Add Role":" Update Role"}</h2>
 
-                    <form action="UpdateRole" method="post">
+                    <form action="${action.equals("new") ? "AddNewRole":" UpdateRole"}" method="post">
                         <!--permission ID-->
                         <input type="hidden" name="id" value="${p != null ? p.permissionId : ''}">
                         <div class="form-grid">
 
                             <!-- Left -->
                             <div class="form-left">
-
+                                <c:if test="${action != 'new'}">
                                 <label>Role id</label>
-                                <input type="text" name="roleId" value="${role != null ? role.roleId : ''}" readonly="true">
-
+                                <input type="text" name="roleId" value="${role != null ? role.roleId : ''}" readonly="true"}>
+                                </c:if>
                                 <label>Role name</label>
                                 <!---->
                                 <input type="text" name="roleName" value="${role != null ? role.roleName : ''}">
 
                                 <label>Status</label><input type="radio" name="isActive" value="true" ${role.isActive ? 'checked' : ''}>Activated | <input type="radio" name="isActive" value="false" ${role.isActive ? '' : 'checked'}>Deactivated
-                                
+
 
 
 
                             </div>
 
-                            <!-- Right -->
-                            <div class="form-right">
+                            <c:if test="${action != 'new'}">
+                                <!-- Right -->
+                                <div class="form-right">
 
-                                <table>
-                                    <tr>
-                                        <td>Permission ID</td>
-                                        <td>Permission name</td>
-                                        <td>Permission description</td>
-                                        <td>Status(included)</td>
-                                    </tr>
-                                    <c:forEach items="${permissions}" var="p">
+                                    <table>
                                         <tr>
-                                        <td><input type="text" value="${p.permissionId}" readonly="true"></td>
-                                        <td><input type="text" value="${p.permissionName}" readonly="true"></td>
-                                        <td><input type="text" value="${p.description}" readonly="true"></td>
+                                            <td>Permission ID</td>
+                                            <td>Permission name</td>
+                                            <td>Permission description</td>
+                                            <td>Status(included)</td>
+                                        </tr>
+                                        <c:forEach items="${permissions}" var="p">
+                                            <tr>
+                                                <td><input type="text" value="${p.permissionId}" readonly="true"></td>
+                                                <td><input type="text" value="${p.permissionName}" readonly="true"></td>
+                                                <td><input type="text" value="${p.description}" readonly="true"></td>
 
-                                            <c:set var="checked" value="false"/>
-                                            <!--check if included in list assigned-->
-                                            <c:forEach items="${includePermissions}" var="ip">
-                                                <c:if test="${ip.permissionId == p.permissionId}">
-                                                    <c:set var="checked" value="true"/>
-                                                </c:if>
-                                            </c:forEach>
-                                            
+                                                <c:set var="checked" value="false"/>
+                                                <!--check if included in list assigned-->
+                                                <c:forEach items="${includePermissions}" var="ip">
+                                                    <c:if test="${ip.permissionId == p.permissionId}">
+                                                        <c:set var="checked" value="true"/>
+                                                    </c:if>
+                                                </c:forEach>
+
                                                 <td><input type="checkbox" name="permission" value="${p.permissionId}" ${checked ? 'checked' : ''}></td>
-                                                
+
                                             </tr>
                                         </c:forEach>
                                     </table>
 
                                 </div>
-
-                            </div>
-
-                            <div class="button-area">
-                                <button type="submit">${act.equals("new") ? "CREATE" : "UPDATE"}</button>
-                            </div>
-                        </form>
-                        <c:if test="${error != null}">
-                            <p>${error}</p>
-                        </c:if>
-
-                        <c:if test="${u != null}">
-                            <tr>
-                                <td>${u.id}</td>
-                                <td>${u.fullName}</td>
-                                <td>${u.role}</td>
-                                <td>${u.gender}</td>
-                                <td>${u.phone}</td>
-                                <td>${u.email}</td>
-                                <td>
-                                    <input type="checkbox"
-                                           ${u.isActive ? 'checked' : ''}>
-                                </td>
                             </c:if>
-                    </div>
+                        </div>
 
+                        <div class="button-area">
+                            <button type="submit">${act.equals("new") ? "CREATE" : "UPDATE"}</button>
+                        </div>
+                    </form>
+                    <c:if test="${error != null}">
+                        <p>${error}</p>
+                    </c:if>
+
+                    <c:if test="${u != null}">
+                        <tr>
+                            <td>${u.id}</td>
+                            <td>${u.fullName}</td>
+                            <td>${u.role}</td>
+                            <td>${u.gender}</td>
+                            <td>${u.phone}</td>
+                            <td>${u.email}</td>
+                            <td>
+                                <input type="checkbox"
+                                       ${u.isActive ? 'checked' : ''}>
+                            </td>
+                        </c:if>
                 </div>
 
             </div>
 
-        </body>
-    </html>
+        </div>
+
+    </body>
+</html>
