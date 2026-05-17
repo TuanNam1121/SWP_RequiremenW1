@@ -19,6 +19,8 @@
     <servlet>
         <servlet-name>ViewProfile</servlet-name>
         <servlet-class>controller.ViewProfile</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ViewPermissionList</servlet-name>
         <servlet-class>controller.ViewPermissionList</servlet-class>
     </servlet>
@@ -57,6 +59,8 @@
     <servlet-mapping>
         <servlet-name>ViewProfile</servlet-name>
         <url-pattern>/viewprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ViewPermissionList</servlet-name>
         <url-pattern>/ViewPermissionList</url-pattern>
     </servlet-mapping>
@@ -68,8 +72,7 @@
         <servlet-name>AddNewPermission</servlet-name>
         <url-pattern>/AddNewPermission</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditPermission</servlet-name>
+    <servlet-mapping><servlet-name>EditPermission</servlet-name>
         <url-pattern>/EditPermission</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
