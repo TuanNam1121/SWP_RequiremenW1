@@ -62,7 +62,7 @@ public class UserDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
 
-                String hashedPassword = rs.getString("password_hash");
+                String hashedPassword = rs.getString("passwordhash");
                 if (BCrypt.checkpw(password, hashedPassword)) {
                     User i = mapResultSetToUser(rs);
                     return i;
@@ -94,7 +94,7 @@ public class UserDAO {
     }
 
     public boolean addNewUser(User user) {
-        String sql = "Insert into Users(username, passwordhash, roleid, phone, email, gender, fullname, isActive)"
+        String sql = "Insert into user(username, passwordhash, roleid, phone, email, gender, fullname, isActive)"
                 + "values (?,?,?,?,?,?,?,?)";
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -160,7 +160,7 @@ public class UserDAO {
     }
 
     public User getUser(String username, String email) {
-        String sql = "select user_id, username, email FROM users where email = ? and username = ?";
+        String sql = "select userid, username, email from user where email = ? and username = ?";
         try (
                 Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setString(1, email);
@@ -168,7 +168,7 @@ public class UserDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     User user = new User();
-                    user.setId(rs.getInt("user_id"));
+                    user.setId(rs.getInt("userid"));
                     user.setUserName(rs.getString("username"));
                     user.setEmail(rs.getString("email"));
                     return user;
