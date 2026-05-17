@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DBContext {
     private static String url = "jdbc:mysql://localhost:3306/Requirement_W1_V2";
     private static String user = "root";
-    private static String pass = "ducanh06";
+    private static String pass = "1234";
 
 
     public static Connection getConnection() throws SQLException {
