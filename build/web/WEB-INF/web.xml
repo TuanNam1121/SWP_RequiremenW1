@@ -76,8 +76,7 @@
         <servlet-name>AddNewPermission</servlet-name>
         <url-pattern>/AddNewPermission</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditPermission</servlet-name>
+    <servlet-mapping><servlet-name>EditPermission</servlet-name>
         <url-pattern>/EditPermission</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

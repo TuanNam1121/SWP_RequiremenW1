@@ -13,9 +13,9 @@ import java.sql.SQLException;
  * @author Admin
  */
 public class DBContext {
-    private static String url = "jdbc:mysql://localhost:3306/SWP_Requirement_W1?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&allowPublicKeyRetrieval=true";
+    private static String url = "jdbc:mysql://localhost:3306/Requirement_W1_V2";
     private static String user = "root";
-    private static String pass = "ducanh06";
+    private static String pass = "admin";
 
 
     public static Connection getConnection() throws SQLException {
