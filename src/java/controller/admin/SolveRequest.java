@@ -38,7 +38,8 @@ public class SolveRequest extends HttpServlet {
         String userId = request.getParameter("userid");
         String reqType = request.getParameter("type");
         if (reqType.equalsIgnoreCase("ResetPassword")) {
-            response.sendRedirect("ChangePassByAdmin.jsp?userId=" + userId);
+            request.setAttribute("userId", userId);
+            request.getRequestDispatcher("ChangePassByAdmin.jsp").forward(request, response);
         }
     } 
 

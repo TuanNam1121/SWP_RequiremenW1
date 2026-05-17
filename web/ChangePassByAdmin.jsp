@@ -64,8 +64,8 @@
                     <form action="changepassbyadmin" method="POST" class="form-container">
 
                         <div class="input-group">
-                            <label>UserId: ${param.userId}</label>
-                            <input type="hidden" name="userId" value="${param.userId}">
+                            <label>UserId: ${userId}</label>
+                            <input type="hidden" name="userId" value="${userId}">
                         </div>
 
                         <div class="input-group">
