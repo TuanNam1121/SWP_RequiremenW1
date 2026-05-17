@@ -32,10 +32,7 @@ public List<Permission> getAllPermission(){
              ResultSet rs = ps.executeQuery()){
             List<Permission> result = new ArrayList<>();
             while(rs.next()){
-                int id = rs.getInt("permissionid");
-                String name = rs.getString("permissionname");
-                String description = rs.getString("description");
-                Permission p = new Permission(id,name,description);
+                Permission p = mapResultSetToPermission(rs);
                 result.add(p);
             }
             return result;
@@ -55,10 +52,7 @@ public List<Permission> getAllPermission(){
             st.setInt(1, permission_id);
             rs = st.executeQuery(); //only select
             if (rs.next()) {
-                int id = rs.getInt("permissionid");
-                String name = rs.getString("permissionname");
-                String description = rs.getString("description");
-                Permission p = new Permission(id,name,description);
+                Permission p = mapResultSetToPermission(rs);
 
                 return p;
             } else {
@@ -79,10 +73,7 @@ public List<Permission> getAllPermission(){
             st.setString(1, permission_name);
             rs = st.executeQuery(); //only select
             if (rs.next()) {
-                int id = rs.getInt("permissionid");
-                String name = rs.getString("permissionname");
-                String description = rs.getString("description");
-                Permission p = new Permission(id,name,description);
+                Permission p = mapResultSetToPermission(rs);
 
                 return p;
             } else {
@@ -128,6 +119,14 @@ public List<Permission> getAllPermission(){
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+    
+        private Permission mapResultSetToPermission(ResultSet rs) throws SQLException {
+        Permission i = new Permission();
+        i.setPermissionId(rs.getInt("permissionid"));
+        i.setPermissionName(rs.getString("permissionname"));
+        i.setDescription(rs.getString("permissionname"));
+        return i;
     }
 
      public static void main(String[] args) {
