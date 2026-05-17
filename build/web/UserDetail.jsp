@@ -51,7 +51,7 @@
                     <h2>${act.equals("new") ? "Add New User" : "Update User Information"}</h2>
 
                     <form action="${act.equals("new") ? "AddNewUser" : "UpdateUserInformation"}" method="post">
-                        <input type="hidden" name="id" value="${u.id != null ? u.id : ''}">
+                        <input type="hidden" name="id" value= "${u.id != null ? u.id : ''}">
                         <div class="form-grid">
 
                             <!-- Left -->
@@ -68,7 +68,7 @@
 
                                 <label>Role</label>
                                 <c:forEach items="${rolelist}" var="i">
-                                    <input type="radio" name="role" value="${i.roleName}" ${u.role == i.roleName ? 'checked' : ''}> <span>${i.roleName}</span>
+                                    <input type="radio" name="role" value="${i.roleId}" ${u.roleId == i.roleId ? 'checked' : ''}> <span>${roleDao.getRoleNamFromRoleID(i.roleId)}</span>
                                 </c:forEach>
 
                             </div>
@@ -123,7 +123,7 @@
                         <tr>
                             <td>${u.id}</td>
                             <td>${u.fullName}</td>
-                            <td>${u.role}</td>
+                            <td>${u.roleId}</td>
                             <td>${u.gender}</td>
                             <td>${u.phone}</td>
                             <td>${u.email}</td>

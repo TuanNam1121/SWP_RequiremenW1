@@ -100,7 +100,7 @@
                                     <td>${u.id}</td>
                                     <td>${u.userName}</td>
                                     <td>${u.fullName}</td>
-                                    <td>${u.role}</td>
+                                    <td>${roleDao.getRoleNamFromRoleID(u.roleId)}</td>
                                     <td>${u.gender}</td>
                                     <td>${u.phone}</td>
                                     <td>${u.email}</td>
