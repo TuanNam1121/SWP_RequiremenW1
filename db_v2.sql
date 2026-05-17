@@ -203,6 +203,24 @@ VALUES
 );
 
 -- =============================================
+-- TEST FORGET PASSWORD
+-- =============================================
+
+INSERT INTO user
+(roleid, username, passwordhash, phone, email, gender, fullname, isActive)
+VALUES
+(
+    2,
+    'ducanh',
+    'hashpass',
+    '0364355772',
+    'ducanh06tb@gmail.com',
+    'MALE',
+    'Nguyen Duc Anh',
+    b'1'
+);
+
+-- =============================================
 -- TEST
 -- =============================================
 SELECT * FROM permission;

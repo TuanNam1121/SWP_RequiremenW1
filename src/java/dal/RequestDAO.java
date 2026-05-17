@@ -21,7 +21,7 @@ import model.Request;
 public class RequestDAO {
 
     public List<Request> getAllRequest() {
-        String sql = "select * from requests order by created_at desc";
+        String sql = "select * from request order by createdat desc";
 
 
         try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
@@ -38,7 +38,7 @@ public class RequestDAO {
     }
 
     public Request getLatestRequestByUserId(int userId) {
-        String sql = "select * from requests where user_id = ? order by created_at desc limit 1";
+        String sql = "select * from request where userid = ? order by createdat desc limit 1";
 
         try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -57,7 +57,7 @@ public class RequestDAO {
     }
 
     public boolean updateRequestStatus(int requestId, String newStatus) {
-    String sql = "update requests set status = ?, completed_at = CURRENT_TIMESTAMP WHERE request_id = ?";
+    String sql = "update request set status = ?, completedat = CURRENT_TIMESTAMP WHERE requestid = ?";
 
     try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
         ps.setString(1, newStatus);
@@ -86,7 +86,7 @@ public class RequestDAO {
     }
 
     public boolean addNewRequest(Request request) {
-        String sql = "Insert into requests(user_id, status, message)"
+        String sql = "Insert into request(userid, status, message)"
                 + " values (?,?,?)";
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
