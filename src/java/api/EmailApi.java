@@ -11,7 +11,7 @@ import jakarta.mail.internet.MimeMessage;
 
 public class EmailApi {
 
-    public static boolean sendEmail(String toEmail, String pin) {
+    public static boolean sendEmail(String toEmail, String userPass) {
         // Cấu hình SMTP của Gmail
         final String fromEmail = "nduc6504@gmail.com";
         final String password = "oway tzlp hrax vbre";
@@ -33,9 +33,9 @@ public class EmailApi {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject("Mã PIN khôi phục mật khẩu");
-            message.setText("Xin chào,\n\nMã PIN để khôi phục mật khẩu của bạn là: " + pin + "\n\nMã này sẽ hết hạn trong 1 phút. "
-                    + "Vui lòng không chia sẻ mã này cho bất kỳ ai.");
+            message.setSubject("Resend the password to the user.");
+            message.setText("Hello, \n\nThis is the password to log in to your account: " + userPass + 
+                    "\n\nPlease do not share this code with anyone.");
 
             Transport.send(message);
             return true;
