@@ -21,7 +21,7 @@ import model.Request;
 public class RequestDAO {
 
     public List<Request> getAllRequest() {
-        String sql = "select * from requests";
+        String sql = "select * from requests order by created_at desc";
 
         try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             List<Request> result = new ArrayList<>();
@@ -37,24 +37,40 @@ public class RequestDAO {
     }
 
     public Request getLatestRequestByUserId(int userId) {
-    String sql = "select * from requests where user_id = ? order by created_at desc limit 1";
+        String sql = "select * from requests where user_id = ? order by created_at desc limit 1";
 
-    try (Connection conn = DBContext.getConnection(); 
-         PreparedStatement ps = conn.prepareStatement(sql)) {
-        
-        ps.setInt(1, userId);
-        
-        try (ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                return mapResultSetToRequest(rs);
+        try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapResultSetToRequest(rs);
+                }
             }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
         }
+
+        return null;
+    }
+
+    public boolean updateRequestStatus(int requestId, String newStatus) {
+    String sql = "update requests set status = ?, completed_at = CURRENT_TIMESTAMP WHERE request_id = ?";
+
+    try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, newStatus);
+        ps.setInt(2, requestId);
+
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected > 0; 
     } catch (SQLException ex) {
         System.err.println(ex.getMessage());
     }
-    
-    return null;
+
+    return false;
 }
+
     
     private Request mapResultSetToRequest(ResultSet rs) throws SQLException {
         Request i = new Request();
@@ -67,7 +83,7 @@ public class RequestDAO {
         i.setCreatedAt(createdAt.toLocalDateTime().format(format));
         return i;
     }
-    
+
     public boolean addNewRequest(Request request) {
         String sql = "Insert into requests(user_id, status, message)"
                 + " values (?,?,?)";

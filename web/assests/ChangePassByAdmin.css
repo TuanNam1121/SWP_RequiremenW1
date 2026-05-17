@@ -6,108 +6,108 @@
 }
 
 body {
-    padding: 30px;
-    height: 100vh;
-    display: flex;
-    background-color: #f9f9f9;
+    padding: 20px;
 }
+
+/* MAIN LAYOUT */
 
 .container {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
+
     border: 2px solid black;
     border-radius: 20px;
+
     display: flex;
-    background-color: white;
-    overflow: hidden;
 }
+
+/* SIDEBAR */
 
 .sidebar {
     width: 250px;
+
     border-right: 2px solid black;
+
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
 }
 
 .logo-box {
     height: 80px;
+
     border: 2px solid black;
     border-radius: 15px;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
 
-.sidebar-divider {
-    position: absolute;
-    top: 120px;
-    left: 0;
-    width: 100%;
-    border-bottom: 2px solid black;
+    margin-bottom: 20px;
 }
 
 .menu {
     margin-top: 20px;
+
     border: 2px solid black;
     border-radius: 20px;
-    flex: 1;
-    padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+
+    min-height: 500px;
+
+    padding: 20px;
 }
 
 .menu-item {
+    display: block;
+
     text-decoration: none;
     color: black;
-    font-size: 16px;
+
+    margin-bottom: 20px;
 }
 
 .menu-item.active {
     font-weight: bold;
-    font-size: 18px;
 }
+
+/* MAIN CONTENT */
 
 .main-content {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+
     padding: 30px;
 }
+
+/* TOPBAR */
 
 .topbar {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 20px;
+
+    margin-bottom: 40px;
 }
 
 .admin-box {
-    width: 150px;
-    height: 45px;
+    width: 160px;
+    height: 50px;
+
     border: 2px solid black;
-    border-radius: 25px;
+    border-radius: 15px;
+
     display: flex;
     align-items: center;
-    padding: 5px 15px;
-    gap: 15px;
+    gap: 10px;
+
+    padding: 10px;
 }
 
 .avatar {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
+
     border: 2px solid black;
     border-radius: 50%;
 }
 
-.admin-box span {
-    font-size: 16px;
-}
-
+/* CONTENT */
 .content-box {
     flex: 1;
     padding: 20px;

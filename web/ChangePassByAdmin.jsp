@@ -9,33 +9,55 @@
         <title>Change Password</title>
         <link rel="stylesheet" href="assests/ChangePassByAdmin.css">
     </head>
+    
     <body>
-
         <div class="container">
 
+            <!-- Sidebar -->
             <div class="sidebar">
+
                 <div class="logo-box">
                     Logo
                 </div>
 
-                <div class="sidebar-divider"></div>
+                <hr>
 
                 <div class="menu">
-                    <a href="#" class="menu-item active">Home</a>
-                    <a href="#" class="menu-item">Role Management</a>
-                    <a href="#" class="menu-item">Permission Management</a>
+
+                    <a href="AdminDashBoard" class="menu-item">
+                        Home
+                    </a>
+                    <br>
+                    <a href="ViewUserList" class="menu-item">
+                        User Management
+                    </a>
+                    <br>
+                    <a href="ViewRoleList" class="menu-item">
+                        Role Management
+                    </a>
+                    
+                    <a href="ViewPermissionList" class="menu-item">
+                        Permission Management
+                    </a>
+
                 </div>
+
             </div>
 
+            <!-- Main Content -->
             <div class="main-content">
 
+                <!-- Top Bar -->
                 <div class="topbar">
+
                     <div class="admin-box">
                         <div class="avatar"></div>
                         <span>admin</span>
                     </div>
+
                 </div>
 
+                <!-- Content -->
                 <div class="content-box">
                     <h2>change password</h2>
 
@@ -70,6 +92,5 @@
             </div>
 
         </div>
-
     </body>
 </html>

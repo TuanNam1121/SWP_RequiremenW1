@@ -35,7 +35,7 @@
                     <a href="ViewRoleList" class="menu-item">
                         Role Management
                     </a>
-                    
+
                     <a href="ViewPermissionList" class="menu-item">
                         Permission Management
                     </a>
@@ -57,6 +57,11 @@
 
                 </div>
 
+                <c:if test="${not empty message}">
+                    <div style="color: green; font-weight: bold;">
+                        ${message}
+                    </div>
+                </c:if>
                 <!-- Content -->
                 <div class="content-box">
 

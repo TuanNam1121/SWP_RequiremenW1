@@ -69,6 +69,8 @@ public class ChangePassByAdmin extends HttpServlet {
             user.setPassword(hashedNewPass);
             Request req = rDao.getLatestRequestByUserId(userId);
             req.setStatus("COMPLETED");
+            rDao.updateRequestStatus(req.getRequestId(), req.getStatus());
+            
             boolean isEmailSent = EmailApi.sendEmail(user.getEmail(), newPass);
             if (isEmailSent) {
                 request.setAttribute("message", "Change password successfully and email sent!");
@@ -78,7 +80,7 @@ public class ChangePassByAdmin extends HttpServlet {
         } else {
             request.setAttribute("message", "Error! Please try again!");
         }
-        request.getRequestDispatcher("AdminDashBoard.jsp").forward(request, response);
+        request.getRequestDispatcher("AdminDashBoard").forward(request, response);
     }
 
     @Override
