@@ -40,6 +40,7 @@ public class UpdateUserInformation extends HttpServlet {
             List<Role> list = roleDao.getAllRoleToAssign();
             User user = userDao.getUserFromId(id);
             request.setAttribute("u", user);
+            request.setAttribute("roleDao", roleDao);
             request.setAttribute("rolelist", list);
             request.getRequestDispatcher("UserDetail.jsp").forward(request, response);
         } catch (NumberFormatException ex) {
@@ -64,15 +65,14 @@ public class UpdateUserInformation extends HttpServlet {
         String id_raw = request.getParameter("id");
         String userName = request.getParameter("username");
         String fullname = request.getParameter("fullname");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
+        String roleId = request.getParameter("role");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
         String isActive_raw = request.getParameter("active");
         boolean isActive = ("true".equals(isActive_raw));
         try {
-            User i = new User(Integer.parseInt(id_raw), userName, fullname, role, phone, email, gender, isActive);
+            User i = new User(Integer.parseInt(id_raw), userName, fullname, Integer.parseInt(roleId), phone, email, gender, isActive);
             if (user.updateUserInformation(i)) {
                 response.sendRedirect("ViewUserList");
             } else {

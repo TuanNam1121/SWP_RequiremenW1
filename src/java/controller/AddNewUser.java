@@ -32,10 +32,11 @@ public class AddNewUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RoleDAO role = new RoleDAO();
-        List<Role> list = role.getAllRoleToAssign();
+        RoleDAO roleDao = new RoleDAO();
+        List<Role> list = roleDao.getAllRole();
         String action = "new";
         request.setAttribute("act", action);
+        request.setAttribute("roleDao", roleDao);
         request.setAttribute("rolelist", list);
         request.getRequestDispatcher("UserDetail.jsp").forward(request, response);
     }
@@ -55,12 +56,12 @@ public class AddNewUser extends HttpServlet {
         String userName = request.getParameter("username");
         String fullname = request.getParameter("fullname");
         String password = request.getParameter("password");
-        String role = request.getParameter("role");
+        String roleId = request.getParameter("role");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
         String active_raw = request.getParameter("active");
-        User i = new User(userName, fullname, password, role, phone, email, gender, true);
+        User i = new User(userName, fullname, password, Integer.parseInt(roleId), phone, email, gender, true);
         if (user.addNewUser(i)) {
             response.sendRedirect("ViewUserList");
         } else {

@@ -71,9 +71,9 @@
 
                         <thead>
                             <tr>
-                                <th>UserId</th>
-                                <th>Message</th>
-                                <th>CreatedAt</th>
+                                <th>User Id</th>
+                                <th>Request Type</th>
+                                <th>Created At</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -88,7 +88,15 @@
                                     <td>${r.message}</td>
                                     <td>${r.createdAt}</td>
                                     <td>${r.status}</td>
-                                    <td><a href = solverequest?type=${r.message}&userid=${r.userId}>solve</a></td>
+                                    <td>
+                                        <c:if test="${r.status == 'NEW'}">
+                                            <a href="solverequest?type=${r.message}&userid=${r.userId}">solve</a>
+                                        </c:if>
+
+                                        <c:if test="${r.status != 'NEW'}">
+                                            <span></span>
+                                        </c:if>
+                                    </td>
                                 </tr>
                             </c:forEach>
 

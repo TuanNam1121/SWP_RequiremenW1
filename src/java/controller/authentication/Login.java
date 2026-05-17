@@ -31,12 +31,12 @@ public class Login extends HttpServlet {
 
         UserDAO dao = new UserDAO();
         User account = dao.checkLogin(user, pass);
-
+        
         if (account != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", account);
-
-            response.sendRedirect("home");
+            if(account.getRoleId() == 1) response.sendRedirect("AdminDashBoard");
+            else response.sendRedirect("home");
         } else {
             request.setAttribute("error", "Username or Password is not correct!");
             request.getRequestDispatcher("login.jsp").forward(request, response);

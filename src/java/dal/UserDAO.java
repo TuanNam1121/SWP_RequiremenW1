@@ -22,7 +22,7 @@ public class UserDAO {
     private RoleDAO role = new RoleDAO();
 
     public List<User> getAllUsers() {
-        String sql = "Select * from user";
+        String sql = "Select * from user where roleid != 1";
         List<User> list = new ArrayList<>();
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -84,12 +84,7 @@ public class UserDAO {
         i.setEmail(rs.getString("email"));
         i.setFullName(rs.getString("fullname"));
         i.setIsActive(rs.getBoolean("isActive"));
-
-        RoleDAO roleDao = new RoleDAO();
-        if (roleDao != null) {
-            i.setRole(roleDao.getRoleNameFromUserID(i.getId()));
-        }
-
+        i.setRoleId(rs.getInt("roleid"));
         return i;
     }
 
@@ -100,7 +95,7 @@ public class UserDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user.getUserName());
             ps.setString(2, HashPassword.hashPassword(user.getPassword()));
-            ps.setInt(3, role.getRoleIdFromRoleName(user.getRole()));
+            ps.setInt(3, user.getRoleId());
             ps.setString(4, user.getPhone());
             ps.setString(5, user.getEmail());
             ps.setString(6, user.getGender());
@@ -118,7 +113,7 @@ public class UserDAO {
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user.getUserName());
-            ps.setInt(2, role.getRoleIdFromRoleName(user.getRole()));
+            ps.setInt(3, user.getRoleId());
             ps.setString(3, user.getPhone());
             ps.setString(4, user.getEmail());
             ps.setString(5, user.getGender());

@@ -14,7 +14,7 @@ public class User {
     private String userName;
     private String fullName;
     private String password;
-    private String role;
+    private int roleId;
     private String phone;
     private String email;
     private String gender;
@@ -23,22 +23,22 @@ public class User {
     public User() {
     }
 
-    public User(int id, String userName, String fullName, String role, String phone, String email, String gender, boolean isActive) {
+    public User(int id, String userName, String fullName, int roleId, String phone, String email, String gender, boolean isActive) {
         this.id = id;
         this.userName = userName;
         this.fullName = fullName;
-        this.role = role;
+        this.roleId = roleId;
         this.phone = phone;
         this.email = email;
         this.gender = gender;
         this.isActive = isActive;
     }
 
-    public User(String userName, String fullName, String password, String role, String phone, String email, String gender, boolean isActive) {
+    public User(String userName, String fullName, String password, int roleId, String phone, String email, String gender, boolean isActive) {
         this.userName = userName;
         this.fullName = fullName;
         this.password = password;
-        this.role = role;
+        this.roleId = roleId;
         this.phone = phone;
         this.email = email;
         this.gender = gender;
@@ -85,12 +85,12 @@ public class User {
         this.fullName = fullName;
     }
 
-    public String getRole() {
-        return role;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     public String getPhone() {
@@ -119,7 +119,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", userName=" + userName + ", fullName=" + fullName + ", role=" + role + ", phone=" + phone + ", email=" + email + ", gender=" + gender + ", isActive=" + isActive + '}';
+        return "User{" + "id=" + id + ", userName=" + userName + ", fullName=" + fullName + ", role=" + roleId + ", phone=" + phone + ", email=" + email + ", gender=" + gender + ", isActive=" + isActive + '}';
     }
 
 }

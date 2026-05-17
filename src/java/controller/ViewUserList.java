@@ -4,9 +4,9 @@
  */
 package controller;
 
+import dal.RoleDAO;
 import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.User;
-import org.w3c.dom.UserDataHandler;
 
 /**
  *
@@ -27,7 +26,9 @@ public class ViewUserList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDAO user = new UserDAO();
+        RoleDAO role = new RoleDAO();
         List<User> userList = user.getAllUsers();
+        request.setAttribute("roleDao", role);
         request.setAttribute("userlist", userList);
         request.getRequestDispatcher("ViewUserList.jsp").forward(request, response);
     }

@@ -9,8 +9,6 @@
     <body>
 
     <center>
-
-
         <form action="changePassword" method="post">
             <table>
                 <tr>

@@ -26,7 +26,7 @@ public class Home extends HttpServlet {
         User user = (User) session.getAttribute("user");
         request.setAttribute("user", user);
 
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        request.getRequestDispatcher("Homepage.jsp").forward(request, response);
     }
 
     @Override
