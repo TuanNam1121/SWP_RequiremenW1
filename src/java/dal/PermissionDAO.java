@@ -59,7 +59,6 @@ public List<Permission> getAllPermission(){
                 String name = rs.getString("permissionname");
                 String description = rs.getString("description");
                 Permission p = new Permission(id,name,description);
-
                 return p;
             } else {
                 return null;

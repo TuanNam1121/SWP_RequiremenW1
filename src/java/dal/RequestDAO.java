@@ -21,7 +21,7 @@ import model.Request;
 public class RequestDAO {
 
     public List<Request> getAllRequest() {
-        String sql = "select * from requests";
+        String sql = "select * from request";
 
         try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             List<Request> result = new ArrayList<>();
@@ -38,11 +38,11 @@ public class RequestDAO {
 
     private Request mapResultSetToRequest(ResultSet rs) throws SQLException {
         Request i = new Request();
-        i.setRequestId(rs.getInt("request_id"));
-        i.setUserId(rs.getInt("user_id"));
+        i.setRequestId(rs.getInt("requestid"));
+        i.setUserId(rs.getInt("userid"));
         i.setStatus(rs.getString("status"));
         i.setMessage(rs.getString("message"));
-        Timestamp createdAt = rs.getTimestamp("created_at");
+        Timestamp createdAt = rs.getTimestamp("createdat");
         DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         i.setCreatedAt(createdAt.toLocalDateTime().format(format));
         return i;

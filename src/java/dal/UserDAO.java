@@ -22,7 +22,7 @@ public class UserDAO {
     private RoleDAO role = new RoleDAO();
 
     public List<User> getAllUsers() {
-        String sql = "Select * from users";
+        String sql = "Select * from user";
         List<User> list = new ArrayList<>();
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class UserDAO {
     }
 
     public User getUserFromId(int userId) {
-        String sql = "Select * from users where user_id = ?";
+        String sql = "Select * from user where userid = ?";
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, userId);
@@ -55,7 +55,7 @@ public class UserDAO {
     }
 
     public User checkLogin(String username, String password) {
-        String sql = "Select * from users where username = ?";
+        String sql = "Select * from user where username = ?";
         try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
 
             ps.setString(1, username);
@@ -77,19 +77,19 @@ public class UserDAO {
 
     public User mapResultSetToUser(ResultSet rs) throws SQLException {
         User i = new User();
-        i.setId(rs.getInt("user_id"));
+        i.setId(rs.getInt("userid"));
         i.setUserName(rs.getString("username"));
         i.setRole(role.getRoleNameFromUserID(i.getId()));
-        i.setPhone(rs.getString("sdt"));
+        i.setPhone(rs.getString("phone"));
         i.setGender(rs.getString("gender"));
         i.setEmail(rs.getString("email"));
-        i.setFullName(rs.getString("full_name"));
-        i.setIsActive(rs.getBoolean("is_active"));
+        i.setFullName(rs.getString("fullname"));
+        i.setIsActive(rs.getBoolean("isActive"));
         return i;
     }
 
     public boolean addNewUser(User user) {
-        String sql = "Insert into Users(username, password_hash, role_id, sdt, email, gender, full_name, is_active)"
+        String sql = "Insert into Users(username, passwordhash, roleid, phone, email, gender, fullname, isActive)"
                 + "values (?,?,?,?,?,?,?,?)";
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -109,7 +109,7 @@ public class UserDAO {
     }
 
     public boolean updateUserInformation(User user) {
-        String sql = "Update Users SET username = ?, role_id = ? , sdt = ?, email = ?, gender = ?, full_name = ?, is_active = ? where user_id = ?";
+        String sql = "Update User SET username = ?, roleid = ? , phone = ?, email = ?, gender = ?, fullname = ?, isActive = ? where userid = ?";
         try (Connection conn = DBContext.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user.getUserName());
@@ -128,7 +128,7 @@ public class UserDAO {
     }
 
     public boolean updateUserPassword(int userID, String newHashedPassword) {
-        String sql = "Update Users SET password_hash = ? where user_id = ?";
+        String sql = "Update User SET passwordhash = ? where userid = ?";
         try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setString(1, newHashedPassword);
             ps.setInt(2, userID);
@@ -141,32 +141,21 @@ public class UserDAO {
     }
 
     public String getPasswordById(int userId) {
-        String sql = "SELECT password_hash FROM Users WHERE user_id = ?";
+        String sql = "SELECT passwordhash FROM User WHERE userid = ?";
         try (Connection conn = DBContext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return rs.getString("password_hash");
+                return rs.getString("passwordhash");
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        UserDAO user = new UserDAO();
-
-        List<User> list = user.getAllUsers();
-        for (User i : list) {
-            System.out.println(i.toString());
-        }
-
-        System.out.println(user.getUserFromId(2));
-    }
-
+    
     public boolean checkEmailExist(String email) {
-        String sql = "Select 1 from users where email = ?";
+        String sql = "Select 1 from user where email = ?";
         try (
             Connection conn = DBContext.getConnection(); 
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -179,5 +168,16 @@ public class UserDAO {
             System.out.println(ex.getMessage());
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        UserDAO user = new UserDAO();
+
+        List<User> list = user.getAllUsers();
+        for (User i : list) {
+            System.out.println(i.toString());
+        }
+
+        System.out.println(user.getUserFromId(2));
     }
 }
